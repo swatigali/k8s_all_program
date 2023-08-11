@@ -1,0 +1,203 @@
+
+
+
+
+1. Install Powershell (Search in Google)
+
+#https://github.com/PowerShell/PowerShell
+(in that scroll down)
+#Select Windows(x64) download stable version (101MB) .msi
+(it will start the download)
+.....OR.....
+#https://github.com/PowerShell/PowerShell/releases/download/v7.3.3/PowerShell-7.3.3-win-x64.msi
+(direct link to download Powershell)
+
+(Install the download, it will take time)
+***IMP***#(In Start menu right click on Powershell 7, open with Run Administration)
+#The powershell cmd prompt will open, don't close it
+
+2. Install Chocolatey (Search in Google)
+
+#paste the cmds in powershell cmd prompt from (*)
+
+#https://docs.chocolatey.org/en-us/choco/setup
+(in that scroll down) to
+(Install with PowerShell.exe)
+#Get-ExecutionPolicy     .....(*)
+(O/P---RemoteSigned)
+(We want Bypass as O/P)
+#Set-ExecutionPolicy Bypass -Scope Process
+#Get-ExecutionPolicy
+(O/P---Bypass)
+#Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+(O/P---downloading chocolatey on powershell)
+
+#choco (O/P---Chocolatey v1.3.0)
+
+3. Install openjdk 8 using chocolatey on powershell (Search in Google)
+
+#paste the cmds in powershell cmd prompt from (*)
+
+#https://community.chocolatey.org/packages/openjdk8
+...OR...
+#choco install openjdk8    .....(*)
+(direct cmd to install openjdk8 on Powershell cmd prompt)
+
+#a (it asks to run all the script)
+
+(the process will take time)
+
+4. Install Maven
+
+#paste the cmds in powershell cmd prompt from (*)
+
+#choco install maven     .....(*)
+
+#a (it asks to run all the script)
+
+#close and open powershell again with run administration
+
+5. Go to the war folder of Vertex (Desktop Folder)
+
+src->main->webapps->WEB-INF->view->login
+(click on login, it will open in VSC)
+
+***#in line 40 <h2>(Change the name to specific)</h2> (Welcome to Hell)
+
+***#delete the .war file in the target folder
+
+#cd C:\Users\Vinit\Desktop\war
+(copy the path)
+
+#mvn install
+(it creats a new .war file in target folder)
+
+6. Create a S3 Bucket 
+
+#upload the latest created .war file of vertex
+
+#copy object url 
+
+#https://mynewvertex.s3.us-east-2.amazonaws.com/mahaLogin-5.0.war
+
+7. Start the master node instances
+
+#open master in gitbash
+
+#sudo -i
+#mkdir mydocker
+#vi Dockerfile
+(Editor opens)
+-----------------------------
+FROM tomcat:8.5.37-jre8
+MAINTAINER vinit
+RUN apt-get update
+ADD https://mynewvertex.s3.us-east-2.amazonaws.com/mahaLogin-5.0.war /usr/local/tomcat/webapps
+EXPOSE 8080
+CMD ["catalina.sh","run"]
+-------------------------------
+
+#docker build -t mywarimage:1 .
+(creates a image/software)
+
+#docker images 
+(checks if the mywarimage created)
+
+#docker tag mywarimage:1 vinithttps/mywarimage11323:1
+(creates a image/software via vinithttps .. hub.docker.com)
+
+#docker images 
+(checks if the vinithttps/mywarimage11323 created)
+
+#docker login
+
+Username : vinithttps
+Password : AWSAWS@9196
+
+(Login Succeeded)
+
+#docker push vinithttps/mywarimage11323:1
+(pushes the files from gitbash to hub.docker.com)
+
+8. Go to VSC open K8svc folder 
+(should contain MyRC.yml & MySVC.yml)
+---------------------------------
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myvertexapp-rc
+spec:
+   replicas: 2
+   selector: 
+     app: myvertexapp
+     version: 2.6.3
+   template:                                     
+     metadata:
+       labels:
+          app: myvertexapp
+          version: 2.6.3
+     spec:
+        containers:
+        - name: myonlineapp-container
+          image: vinithttps/mywarimage11323:1
+          ports:
+          - containerPort: 8080 
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: vertex-svc
+  labels:
+    app: myvertexapp
+    version: 2.6.3
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 30001
+    protocol: TCP
+  selector:
+    app: myvertexapp
+    version: 2.6.3
+
+
+#in vsc terminal
+git add -A
+git commit -m "war"
+git push
+---------------------------------------
+
+9. Go gitbash 
+
+#cd K8SVSC
+(go into the folder)
+
+#git pull
+(pulls files from vsc to gitbash)
+
+#kubectl apply -f MyRC.yml
+(Updates the file with new file)
+
+#kubectl get pods
+(O/P---myvertexapp-rc-vpf2z      1/1     Running   0             11s
+       myvertexapp-rc-zsjpk      1/1     Running   0             11s
+to check if pods are created)
+
+#kubectl apply -f MySVC.yml
+(Updates the file with new file)
+
+10. Copy nodes ip and paste in Google url
+
+http://18.222.200.140:30001/mahaLogin-5.0/login
+
+(The page will appear with the specific message you changed in Step 5.)
+
+
+
+
+
+
+
+
+

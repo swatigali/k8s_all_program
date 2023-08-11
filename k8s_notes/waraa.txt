@@ -1,0 +1,48 @@
+
+
+
+mkdir mydocker
+
+cd mydocker
+
+vi Dockerfile
+
+FROM tomcat:8.5.37-jre8
+MAINTAINER vinit
+RUN apt-get update
+ADD https://k8-a-17323.s3.us-east-2.amazonaws.com/mahaLogin-5.0.war /usr/local/tomcat/webapps
+EXPOSE 8080
+CMD ["catalina.sh","run"]
+
+
+docker build -t waraaimage:1 .
+
+docker images
+
+docker tag waraaimage:1 vinithttps/waraaimage17m23:1
+
+docker images
+
+docker push vinithttps/waraaimage17m23:1
+
+kubectl create -f myrcdeploy.yml --record
+
+kubectl get deploy
+
+kubectl create -f mysvcdeploy.yml
+
+kubectl get svc
+
+kubectl get deploy
+
+
+
+
+
+
+
+
+
+
+
+

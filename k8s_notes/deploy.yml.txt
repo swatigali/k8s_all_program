@@ -1,0 +1,58 @@
+hii, I request u to waive off my generated bills. I am a learner, I was unaware of billing criteria. Please negotiate my mistake.
+
+
+    8  kubectl create namespace dev
+    9  kubectl create namespace tester1
+   10  kubectl create namespace tester2
+   11  kubectl create namespace prod
+
+--kubelet-insecure-tls
+kubectl get pods -n kubesystem (log also can check)
+Apply Deployment file
+kubectl get all
+kubectl autoscale deployment mydeploy --cpu-percent=20 --min=1 --max=10
+kubectl get all
+watch kubectl get all 
+
+other terminal 
+kubectl exec mydeploy-fennwn -it -- /bin/bash
+
+
+wget -O metricserver.yml https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.6.2/components.yaml
+--kubelet-insecure-tls
+kubectl get pods -n kubesystem (log also can check)
+Apply Deployment file
+kubectl get all
+kubectl autoscale deployment mydeploy --cpu-percent=20 --min=1 --max=10
+kubectl get all
+watch kubectl get all 
+
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: mydeploy
+spec:
+   replicas: 1
+   selector:
+    matchLabels:
+     name: deployment
+   template:
+     metadata:
+       name: testpod8
+       labels:
+         name: deployment
+     spec:
+      containers:
+        - name: c00
+          image: httpd
+          ports:
+          - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
+
+other terminal 
+kubectl exec mydeploy-fennwn -it -- /bin/bash
+

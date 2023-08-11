@@ -1,0 +1,33 @@
+Some Basic interview questions about Amazon Elastic Kubernetes Service (Amazon EKS):
+
+1. What is Amazon EKS, and what are its key features?
+2. How does Amazon EKS differ from self-managed Kubernetes clusters?
+3. How do you create an EKS cluster using the AWS Management Console or the AWS CLI?
+4. What are worker nodes in EKS, and how are they managed?
+5. Can you explain the concept of "pods" in Kubernetes and how they work in EKS?
+6. How does EKS handle auto-scaling of worker nodes based on demand?
+7. What are the best practices for securing an EKS cluster?
+8. How can you monitor the performance and health of an EKS cluster?
+9. What is the purpose of the "kubectl" command, and how do you use it with EKS?
+10. How do you update the Kubernetes version of an EKS cluster?
+11. How do you configure networking for an EKS cluster, and what are the available options?
+12. What is a "namespace" in Kubernetes, and how is it used in EKS?
+13. Can you explain the concept of "deployments" in Kubernetes and how they are managed in EKS?
+14. What is the purpose of "service accounts" in EKS, and how do you create and manage them?
+15. How do you deploy applications to an EKS cluster using Kubernetes manifests or Helm charts?
+16. What is the difference between "rolling updates" and "blue/green deployments" in EKS?
+17. How can you achieve high availability in an EKS cluster across multiple availability zones?
+18. What are the various container runtime options supported in EKS, and how do they differ?
+19. How can you integrate EKS with AWS Identity and Access Management (IAM) for access control?
+20. Can you explain the concept of "horizontal pod autoscaling" in EKS and how it works?
+21. How do you troubleshoot common issues in an EKS cluster, such as failed pods or unresponsive nodes?
+22. What are the different types of EKS worker node instance types available, and how do you choose the right one for your workload?
+23. How does Amazon EKS handle load balancing for applications running in the cluster?
+24. What are the best practices for backing up and restoring data in an EKS cluster?
+25. How do you perform rolling updates for Kubernetes deployments in EKS while ensuring minimal downtime?
+26. Can you explain the concept of "persistent volumes" in EKS and how they are used for data storage?
+27. How can you integrate EKS with AWS CloudWatch for monitoring and logging purposes?
+28. What is the EKS Managed Node Groups feature, and how does it simplify worker node management?
+29. How do you secure container images used in EKS, and what is the significance of "image scanning"?
+30. What are the options for autoscaling EKS worker nodes based on custom metrics?
+31. How can you use AWS PrivateLink to securely access EKS resources?

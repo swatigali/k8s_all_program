@@ -1,0 +1,40 @@
+KUBERNETES ARCHITECTURE 🎡
+
+What are the main components of Kuberenetes Architecture?
+1️⃣ . Node: A node is a machine on which your application runs in the form of a container. The machine could be either a physical machine or a virtual machine.
+2️⃣ . Pods: A pod is a set of running containers on your cluster. This is the thing in which your containers are actually present.
+3️⃣ . Master Node: The master node is that server which will create the cluster and it also manages the worker nodes.
+4️⃣ . Worker Nodes: These nodes have the server which host the application as pods and containers.
+
+Master Node Components:
+
+5️⃣ . API Server: It is responsible for orchestrating all the operations on the cluster. It can also be accessed by the clients outside the cluster.The API server is the front end for the Kubernetes control plane. The API server is implemented as kube-apiserver in K8S.
+6️⃣ . Controller Manager: It runs all controller processes.
+7️⃣ . Replication Controller: As the name suggests, a Replication Controller enables that a specified number of pod replicas are running at any one time. It makes sure that a pod is always up and available.
+8️⃣ . ETCD : It is the main database of the K8S cluster. It stores data in key-value format.
+9️⃣ . Node Controller: It is used for managing the nodes.
+🔟 . Scheduler: It identifies the correct node to be placed in the correct container.
+
+ADDONs:
+
+1️⃣1️⃣ . DNS: It is used to reolve the name of the container inside the master node. No two containers should have the same name, hence, DNS is used.
+1️⃣2️⃣ . Web UI: It allows users to manage and troubleshoot applications running in the cluster.
+1️⃣3️⃣ . Container RunTime: It is the software that is responsible to run the containers. The most popular examples are Docker, Containerd and CRIO.
+
+Node Worker Components:
+
+1️⃣4️⃣ . Kubelet: It is the service on the node which is used to connect it to it's master node. It also ensures that the pods and containers are running
+and their health is ok.
+1️⃣5️⃣ . Kube-proxy: It exposes the services to external world. This service is used for subnetting and runs on each worker node.
+#kubernetes #docker #data #frontend #health #software #architecture #database #ui #awscommunity #docker #k8s
+Activate to view larger image,
+diagramActivate to view larger image,
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+What is a proxy server?
+A proxy server also called as forward proxy server sits infront of a group of client machines. When any computer makes requests to the sites and services on the internet the proxy server intercepts those requests and then communicates with web servers on behalf of those clients.
+
+
+What is a reverse proxy?
+A reverse proxy is a server that sits infront of web server and forwards client requests to those web servers.
+Reverse proxies are typically implemented to help increase security.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

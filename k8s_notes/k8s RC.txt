@@ -1,0 +1,91 @@
+in VS code write this code or paste it save file as myRC.yml
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myonlineapp-rc
+spec:
+  replicas: 2
+  selector:
+    app: myonlineapp
+  template:
+    metadata:
+      labels:
+        app: myonlineapp
+        version: 2.6.2
+    spec:
+      containers:
+        - name: myonlineapp-container
+          image: swatigali/myimage28feb23:1
+          ports:
+            - containerPort: 8080
+
+take new terminal .......git hub sign in .........push our code to git repository......
+in terminal.....git add -A enter.......git commit -m "rc" enter......git push .....enter...
+in git bash....... git clone copy line from git https ....paste in bash for eg. ((((((git clone https://github.com/swatigali/k8s_cluster.git))))))
+in git bash.......git pull........enter....ls....enter.....cd k8s_cluster/....enter....
+
+
+root@ip-172-31-16-225:~# git clone https://github.com/swatigali/k8s_cluster.git
+Cloning into 'k8s_cluster'...
+remote: Enumerating objects: 24, done.
+remote: Counting objects: 100% (24/24), done.
+remote: Compressing objects: 100% (19/19), done.
+remote: Total 24 (delta 4), reused 23 (delta 3), pack-reused 0
+Unpacking objects: 100% (24/24), 1.07 MiB | 4.53 MiB/s, done.
+
+root@ip-172-31-16-225:~# ls
+k8s_cluster  pod.yml  snap
+
+root@ip-172-31-16-225:~# cd k8s_cluster/
+root@ip-172-31-16-225:~/k8s_cluster# git pull
+Already up to date.
+
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl create -f myRC.yml
+replicationcontroller/myonlineapp-rc created
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl get rc
+NAME             DESIRED   CURRENT   READY   AGE
+myonlineapp-rc   2         2         2       51s
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl get pods
+NAME                   READY   STATUS    RESTARTS   AGE
+hello-pod              1/1     Running   0          38m
+myonlineapp-rc-2jfss   1/1     Running   0          59s
+myonlineapp-rc-fm7rb   1/1     Running   0          59s
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl get pods -o wide
+NAME                   READY   STATUS    RESTARTS   AGE   IP          NODE               NOMINATED NODE   READINESS GATES
+hello-pod              1/1     Running   0          38m   10.38.0.1   ip-172-31-10-212   <none>           <none>
+myonlineapp-rc-2jfss   1/1     Running   0          69s   10.40.0.3   ip-172-31-3-123    <none>           <none>
+myonlineapp-rc-fm7rb   1/1     Running   0          69s   10.38.0.2   ip-172-31-10-212   <none>               <none>
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl delete rc/myonlineapp-rc
+replicationcontroller "myonlineapp-rc" deleted
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl apply -f myRC.yml
+replicationcontroller/myonlineapp-rc created
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl get pods
+NAME                   READY   STATUS    RESTARTS   AGE
+hello-pod              1/1     Running   0          54m
+myonlineapp-rc-9kgc7   1/1     Running   0          12s
+myonlineapp-rc-m9g46   1/1     Running   0          12s
+
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl get rc
+NAME             DESIRED   CURRENT   READY   AGE
+myonlineapp-rc   2         2         2       25s
+
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl delete rc/myonlineapp-rc
+replicationcontroller "myonlineapp-rc" deleted
+
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl get rc
+No resources found in default namespace.
+
+root@ip-172-31-16-225:~/k8s_cluster# kubectl get pods
+NAME        READY   STATUS    RESTARTS   AGE
+hello-pod   1/1     Running   0          55m

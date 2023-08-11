@@ -1,0 +1,41 @@
+
+
+
+vi Dockerfile
+
+FROM tomcat:8.5.37-jre8
+MAINTAINER vinit
+RUN apt-get update
+ADD https://k8-b-17323.s3.us-east-2.amazonaws.com/mahaLogin-5.0.war /usr/local/tomcat/webapps
+EXPOSE 8080
+CMD ["catalina.sh","run"]
+
+docker build -t warbbimage:1 .
+
+docker images
+
+docker tag warbbimage:1 vinithttps/warbbimage17m23:1
+
+docker images
+
+docker push vinithttps/warbbimage17m23:1
+
+kubectl apply -f myrcdeploy.yml --record
+
+kubectl get deploy
+
+kubectl create -f mysvcdeploy.yml
+
+kubectl get svc
+
+kubectl get deploy
+
+kubectl rollout undo deployment myrcdeploy --to-revision=1
+
+
+
+
+
+
+
+

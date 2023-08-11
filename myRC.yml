@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myonlineapp-rc
+spec:
+  replicas: 2
+  selector:
+    app: myonlineapp
+  template:
+    metadata:
+      labels:
+        app: myonlineapp
+        version: 2.6.2
+    spec:
+      containers:
+        - name: myonlineapp-container
+          image: swatigali/myimage28feb23:1
+          ports:
+            - containerPort: 8080
